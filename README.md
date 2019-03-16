@@ -57,19 +57,19 @@ Spring Boot를 익히기 위해 Spring Boot Reference Guide 및 해당 문서 �
 
 | 주차  |학습 내용|Offline 모임일|
 | ----- | -------------------- | -------------------- |
-| 01 |바람개비 Orientation|미정|
-| 02 |[**스프링 부트 시작하기**](https://youtu.be/CnmTCMRTbxo)|미정|
-|03|[**Executable JAR 어떻게 만들고 어떻게 동작하는가**](https://youtu.be/PicKx3lDGLk)|미정|
-|04|[**스프링 부트 스타터**](https://youtu.be/w9wqpnLHnkY)|미정|
-|05|[**@SpringBootApplication과 XML 빈 설정 파일 사용하기**](https://youtu.be/jftcS1BQ_0g)|미정|
-|06|[**spring-boot-devtools 그리고 릴로딩**](https://youtu.be/5BhWpx7RW-w)|미정|
-|07|[**배너 그리고 SpringApplication**](https://youtu.be/38UK7BRJf1o)|미정|
-|08|[**SpringApplication 커스터마이징과 Admin 기능 (MBeans)**](https://youtu.be/8fK1tA7C6Ss)|미정|
-|09|[**프로퍼티와 각종 외부 설정의 우선 순위**](https://youtu.be/jv50m3yOemU)|미정|
-|10|[**YAML 사용하기**](https://youtu.be/m7j6ysAW5rc)|미정|
-|11|[**@ConfigurationProperties의 여러 장점과 유일한 단점**](https://youtu.be/0QUNXpRHVVM)|미정|
-|12|[**스프링 프로파일과 스프링 부트 기본 로깅**](https://youtu.be/h_VoxXhhNH0)|미정|
-|13|[**커스텀 로그 설정 제공하기와 logback에서 스프링프로파일 사용하기**](https://youtu.be/uVR2iBEb474)|미정|
+| 01 |바람개비 Orientation|skip|
+| 02 |[**스프링 부트 시작하기**](https://youtu.be/CnmTCMRTbxo)|2019-03-15|
+|03|[**Executable JAR 어떻게 만들고 어떻게 동작하는가**](https://youtu.be/PicKx3lDGLk)|**2019-03-21**|
+|04|[**스프링 부트 스타터**](https://youtu.be/w9wqpnLHnkY)|2019-03-26|
+|05|[**@SpringBootApplication과 XML 빈 설정 파일 사용하기**](https://youtu.be/jftcS1BQ_0g)|2019-04-04|
+|06|[**spring-boot-devtools 그리고 릴로딩**](https://youtu.be/5BhWpx7RW-w)|2019-04-11|
+|07|[**배너 그리고 SpringApplication**](https://youtu.be/38UK7BRJf1o)|2019-04-18|
+|08|[**SpringApplication 커스터마이징과 Admin 기능 (MBeans)**](https://youtu.be/8fK1tA7C6Ss)|2019-04-25|
+|09|[**프로퍼티와 각종 외부 설정의 우선 순위**](https://youtu.be/jv50m3yOemU)|2019-05-02|
+|10|[**YAML 사용하기**](https://youtu.be/m7j6ysAW5rc)|2019-05-09|
+|11|[**@ConfigurationProperties의 여러 장점과 유일한 단점**](https://youtu.be/0QUNXpRHVVM)|2019-05-16|
+|12|[**스프링 프로파일과 스프링 부트 기본 로깅**](https://youtu.be/h_VoxXhhNH0)|2019-05-23|
+|13|[**커스텀 로그 설정 제공하기와 logback에서 스프링프로파일 사용하기**](https://youtu.be/uVR2iBEb474)|2019-05-30|
 
 #### <u>학습 자료 링크</u>
 
