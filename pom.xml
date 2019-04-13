@@ -37,6 +37,17 @@
                     <excludeDevtools>false</excludeDevtools>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <implemetation-Version>1.0.0</implemetation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
