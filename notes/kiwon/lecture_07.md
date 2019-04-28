@@ -1,6 +1,6 @@
 ## 레퍼런스로 스터디하는 스프링부트 7강
 
-### 23.6 Web Environment
+#### 23.6 Web Environment
 
 스프링 어플리케이션이 알맞은 `ApplicationContext`를 개발자들 위해 생성하는 알고리즘은 아래와 같이 단순하다.
 
@@ -25,7 +25,7 @@ public enum WebApplicationType {
 
 > JUnit test 내부에서 사용하는 `SpringApplication`의 경우엔 `WebApplicationType.NONE`으로 하는 것이 이상적이다.
 
-### 23.7 Accessing Application Argumnets
+#### 23.7 Accessing Application Argumnets
 
 어플리케이션 기동`SpringApplication.run(..)`시 전달한 arguments에 접근하길 원할 때에는, Bean을 주입받아야 하는데, `org.springframework.boot.ApplicationArguments` Bean이다. 해당 interface는 arguments에 포함된 `String[]` 상태의 값과, `option` 과 `non-option` 상태의 값 모두 접근할 수 있게 해준다.
 
@@ -131,7 +131,7 @@ public class HelloService {
 }
 ```
 
-### 23.8 Using the `ApplicationRunner` or `CommandLineRunner`
+#### 23.8 Using the `ApplicationRunner` or `CommandLineRunner`
 
 만약 어플리케이션 실행시에, 지정한 소스코드를 실행할 필요가 있을 경우, `ApplicationRunner` 인터페이스나 `CommandLineRunner` 인터페이스를 사용하면 된다. 
 
@@ -178,7 +178,7 @@ first runner # @Order(1)
 runner second # @Order(2)
 ```
 
-### 23.9 Application Exit
+#### 23.9 Application Exit
 
 `SpringApplication`은 **"shutdown hook"**이라는 것을 등록해, `ApplicationContext`를  "우아하게 (gracefully)" 종료할 수 있게 한다. 특징은 다음과 같다.
 
@@ -187,7 +187,7 @@ runner second # @Order(2)
 * `org.springframework.boot.ExitCodeGenerator` 인터페이스 구현한 Bean들을 통해, 종료시 나오는 "exit code"를 **지정해서** 반환하게 할 수 있다.
   * 위 인터페이스는 `Exception`에 구현해서, 해당 예외 발생시에 `getExitCode()` 메소드로 제공되는 "exit code"를 반환하게 할 수 있다.
 
-### 23.10 Admin Features
+#### 23.10 Admin Features
 
 * `spring.application.admin.enabled` 프로퍼티를 통해 어드민 관련 기능을 활성화 시킬 수 있다.
   *  `MBeanServer`에 `SpringApplicationAdminMXBean`을 노출 시킨다.
