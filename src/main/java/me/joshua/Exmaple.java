@@ -32,7 +32,8 @@ public class Exmaple {
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(Exmaple.class);
         springApplication.addListeners(new MyListner());
+
         springApplication.run(args);
-` `
+
     }
 }
