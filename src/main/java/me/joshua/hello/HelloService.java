@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class HelloService {
 
-    //name으로 정의된 프로퍼티 값을 가져오는 어노테이션
-    @Value("${name}")
-    String name;
+    @Autowired
+    JoshuaProperties joshuaProperties;
 
-    public String getMeassage(){return "Hello "+name; }
+    public String getMeassage(){return "Hello "+joshuaProperties.getName()+ " "
+            + joshuaProperties.getMyPojo().size(); }
 
 //    @PostConstruct
     public void init(){

@@ -1,0 +1,32 @@
+joshua:
+  name: kiwon from yml
+---
+spring:
+  profiles: default
+joshua:
+  name: kiwon default
+  myPojo:
+    - name: my name
+      desc: my desc
+    - name: another name
+      desc: another desc
+---
+spring:
+  profiles: prod
+joshua:
+  name: kiwon prod
+  myPojo:
+    - name: my name
+      desc: my desc
+    - name: another name
+      desc: another desc
+    - name: another name
+      desc: another desc
+---
+spring:
+  profiles: dev
+joshua:
+  name: kiwon dev
+  myPojo:
+  - name: my name
+    desc: my desc
