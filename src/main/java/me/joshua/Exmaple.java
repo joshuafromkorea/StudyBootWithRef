@@ -1,5 +1,6 @@
 package me.joshua;
 
+import me.joshua.hello.DurationProperties;
 import me.joshua.hello.HelloService;
 import me.joshua.hello.JoshuaProperties;
 import me.joshua.hello.MyPojo;
@@ -9,6 +10,7 @@ import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +22,6 @@ import java.util.List;
 
 @RestController
 @SpringBootApplication
-@EnableConfigurationProperties(JoshuaProperties.class)
 public class Exmaple {
 
     @Autowired
@@ -29,8 +30,14 @@ public class Exmaple {
     @Autowired
     Environment environment;
 
+    @Bean
+    @ConfigurationProperties("joshua")
+    public JoshuaProperties joshuaProperties(){
+        return new JoshuaProperties() ;
+    }
+
     @Autowired
-    JoshuaProperties joshuaProperties;
+    DurationProperties durationProperties;
 
     @Bean
     public ExitCodeGenerator exitCodeGenerator(){
@@ -39,17 +46,8 @@ public class Exmaple {
 
     @RequestMapping("/")
     String home(){
-        System.out.println(environment.getProperty("joshua.name"));
-        System.out.println(environment.getProperty("joshua.myPojo[0].name"));
-        System.out.println(environment.getProperty("joshua.myPojo[0].desc"));
-        System.out.println(environment.getProperty("joshua.myPojo[1].name"));
-        System.out.println(environment.getProperty("joshua.myPojo[1].desc"));
-        System.out.println("================================================");
-        System.out.println(joshuaProperties.getName());
-        System.out.println(joshuaProperties.getMyPojo().get(0).getName());
-        System.out.println(joshuaProperties.getMyPojo().get(0).getDesc());
-        System.out.println(joshuaProperties.getMyPojo().get(1).getName());
-        System.out.println(joshuaProperties.getMyPojo().get(1).getDesc());
+        System.out.println(durationProperties.getFirstDuration());
+        System.out.println(durationProperties.getSecondDuration());
         return helloService.getMeassage();
     }
 

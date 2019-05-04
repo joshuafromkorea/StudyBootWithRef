@@ -2,10 +2,12 @@ package me.joshua.hello;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
-@ConfigurationProperties("joshua")
+@ConfigurationProperties
+@Validated
 public class JoshuaProperties {
 
     private String name;
