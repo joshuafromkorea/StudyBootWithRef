@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 @ConfigurationProperties("joshua")
 public class JoshuaProperties {
 

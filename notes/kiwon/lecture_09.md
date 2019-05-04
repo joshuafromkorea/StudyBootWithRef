@@ -98,13 +98,13 @@ YAML파일은 `@PropertySource` 어노테이션으로 읽을 수 없기 때문�
 
 `@Value("${property}")`의 어노테이션을 통해 프로퍼티들을 읽고 주입하는 작업은 번거로울 수 있기 때문에, 스프링부트는  타입화된 Bean들이 어플리케이션의 설정을 제어하고 검증할 수 있도록 하는 방법을 제공한다.
 
-###### `@ConfigurationProperties`을 사용하는 예제 및 설명
+###### `@ConfigurationProperties`을 사용하는 레퍼런스 예제
 
 ```java
-@ConfigurationProperties("acme")
+@ConfigurationProperties("acme") //acme.*로 시작하는 프로퍼티는 아래로 매핑
 public class AcmeProperties {
 
-	private boolean enabled;
+	private boolean enabled; //acme.enabled
 	private InetAddress remoteAddress;
 	private final Security security = new Security();
 	public boolean isEnabled() { ... }
@@ -127,5 +127,136 @@ public class AcmeProperties {
 }
 ```
 
+* `acme.enabled`의 경우 default 값은 `false`이다
 
+* `acme.remote-address`는 `String`을 형변환 해준다.
+
+* getter 와 setter 는 일반적으로 필수이지만, 생략가능한 경우들이 있지만, 생략해서 혼란을 불러 일으킬 수 있으니, 사용하지 않는 것이 낫다.
+
+* `Collection` 타입의 객체는 immutable로 만들지 말아야 한다.
+
+* `@Value`와 `@ConfigurationProperties`의 차이는 **24.8.6**을 참고
+
+* `@ConfigurationProperties`를 사용한 클래스는 아래와 같이 **등록**해야 한다.
+
+  * `@EnableConfigurationProperties` 을 `@Configuration`에 사용
+
+    ```java
+    @Configuration
+    @EnableConfigurationProperties(AcmeProperties.class)
+    public class MyConfiguration {
+    }
+    ```
+
+  * `@Component`와 `@ConfigurationProperties`병행
+
+  ```java
+  @Component
+  @ConfigurationProperties(prefix="acme")
+  public class AcmeProperties {
+  }
+  ```
+
+* 위와 같이 등록된 bean은 정의된 명명 규칙을 따른다 `<prefix>-<fqn>`
+
+  * `<prefix>`는 어노테이션의 어트리뷰트로 등록가능함
+  * `<fqn>`은 패키지를 포함한 클래스의 전체 이름
+  * `<prefix>`r가 없으면 `<fqn>`만 사용된다.
+
+* `@ConfigurationProperties`가 bean이 되어도, 다른 bean을 DI 받지마라.
+
+* `properties` 파일 뿐만 아니라 `SpringApplication`의 외부 YAML 설정도 되며, 아래의 예제처럼 `Environemnt` bean에서 접근 가능하다.
+
+###### `application.yml` : YAML 설정파일
+
+```yml
+spring:
+  profiles: default
+joshua:
+  name: kiwon default
+  myPojo:
+    - name: my name
+      desc: my desc
+    - name: another name
+      desc: another desc
+```
+
+###### `JoshuaProperties.java` : 프로퍼티 type-safe 객체
+
+```java
+@ConfigurationProperties("joshua")
+public class JoshuaProperties {
+
+    private String name;
+
+    private List<MyPojo> myPojo;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<MyPojo> getMyPojo() {
+        return myPojo;
+    }
+
+    public void setMyPojo(List<MyPojo> myPojo) {
+        this.myPojo = myPojo;
+    }
+}
+```
+
+###### `Example.java` : 실행 파일
+
+```java
+@RestController
+@SpringBootApplication
+@EnableConfigurationProperties(JoshuaProperties.class)
+public class Exmaple {
+
+    @Autowired
+    Environment environment;
+
+    @Autowired
+    JoshuaProperties joshuaProperties;
+
+    @RequestMapping("/")
+    String home(){
+        //Environment 에서 접근 (리스트 접근 방식에 주의)
+        System.out.println(environment.getProperty("joshua.name"));
+        System.out.println(environment.getProperty("joshua.myPojo[0].name"));
+        System.out.println(environment.getProperty("joshua.myPojo[0].desc"));
+        System.out.println(environment.getProperty("joshua.myPojo[1].name"));
+        System.out.println(environment.getProperty("joshua.myPojo[1].desc"));
+        System.out.println("================================================");
+        //type-safe 객체에서 접근
+        System.out.println(joshuaProperties.getName());
+        System.out.println(joshuaProperties.getMyPojo().get(0).getName());
+        System.out.println(joshuaProperties.getMyPojo().get(0).getDesc());
+        System.out.println(joshuaProperties.getMyPojo().get(1).getName());
+        System.out.println(joshuaProperties.getMyPojo().get(1).getDesc());
+        return helloService.getMeassage();
+    }
+}
+```
+
+###### `("/")` 접속시 출력 결과
+
+```shell
+kiwon default
+my name
+my desc
+another name
+another desc
+================================================
+kiwon default
+my name
+my desc
+another name
+another desc
+
+```
 

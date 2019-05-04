@@ -2,6 +2,7 @@ package me.joshua;
 
 import me.joshua.hello.HelloService;
 import me.joshua.hello.JoshuaProperties;
+import me.joshua.hello.MyPojo;
 import org.apache.catalina.loader.WebappClassLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ExitCodeGenerator;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @SpringBootApplication
+@EnableConfigurationProperties(JoshuaProperties.class)
 public class Exmaple {
 
     @Autowired
@@ -27,6 +29,9 @@ public class Exmaple {
     @Autowired
     Environment environment;
 
+    @Autowired
+    JoshuaProperties joshuaProperties;
+
     @Bean
     public ExitCodeGenerator exitCodeGenerator(){
         return () -> 42;
@@ -34,8 +39,17 @@ public class Exmaple {
 
     @RequestMapping("/")
     String home(){
-        System.out.println(environment.getProperty("joshua.list", List.class));
         System.out.println(environment.getProperty("joshua.name"));
+        System.out.println(environment.getProperty("joshua.myPojo[0].name"));
+        System.out.println(environment.getProperty("joshua.myPojo[0].desc"));
+        System.out.println(environment.getProperty("joshua.myPojo[1].name"));
+        System.out.println(environment.getProperty("joshua.myPojo[1].desc"));
+        System.out.println("================================================");
+        System.out.println(joshuaProperties.getName());
+        System.out.println(joshuaProperties.getMyPojo().get(0).getName());
+        System.out.println(joshuaProperties.getMyPojo().get(0).getDesc());
+        System.out.println(joshuaProperties.getMyPojo().get(1).getName());
+        System.out.println(joshuaProperties.getMyPojo().get(1).getDesc());
         return helloService.getMeassage();
     }
 
