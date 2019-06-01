@@ -69,7 +69,7 @@
   * `scope` 어트리뷰트로 `local` 밖에서도 사용할 수 있게 지정할 수 있다.
 
 ```xml
-<springProperty scope="context" name="fluentHost" source="myapp.fluentd.host"
+<springProperty scope="context" name="fluentHost" source="myapp.fluent.host"
 		defaultValue="localhost"/>
 <appender name="FLUENT" class="ch.qos.logback.more.appenders.DataFluentAppender">
 	<remoteHost>${fluentHost}</remoteHost> <!-- 위에서 등록한 값을 사용 -->

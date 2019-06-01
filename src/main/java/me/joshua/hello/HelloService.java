@@ -13,11 +13,6 @@ import java.util.stream.Collectors;
 @Service
 public class HelloService {
 
-    @Autowired
-    JoshuaProperties joshuaProperties;
-
-    public String getMeassage(){return "Hello "+joshuaProperties.getName()+ " "
-            + joshuaProperties.getMyPojo().size(); }
 
 //    @PostConstruct
     public void init(){
