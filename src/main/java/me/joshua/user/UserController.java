@@ -16,8 +16,6 @@ public class UserController {
     @RequestMapping("/")
     public String index() {
 
-        converters.getConverters().forEach(c-> System.out.println(c.getClass()));
-
         return "hello";
     }
 
