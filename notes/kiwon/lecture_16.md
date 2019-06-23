@@ -5,7 +5,78 @@
 * 스프링 MVC는 `WebBindingInitializer`를 통해서 `WebDataBinder`를 초기화해서, 특정 요청을 위해서 사용한다.
   * 스프링 MVC에서 데이터를 바인딩할 때 사용하는 핵심적인 모듈이다.
   * 직접 커스터마이징 하려면 `ConfigurableWebBindingInitializer`라는 `@Bean`을 만들면 된다.
+  
+* **`Converter`를 구현하여 사용하는 예**
 
+    ###### `BangsongController.java`
+
+    ```java
+    @RestController
+    public class BangsongController {
+    	@GetMapping("/bs/{id}")
+    	public Bangsong getBangsong(@PathVariable("id") Bangsong bangsong){
+        	return bangsong;
+    	}
+    }
+    ```
+
+    * 위와 같은 경우에, `String`을 `Bangsong` 타입으로 변환해주는 컨버터를 등록해야 하는데, 이때 `ConfigurableWebBindingInitializer`를 사용해야 한다.
+
+    ###### `BangsongConverter` 구현
+
+    ```java
+    public class BangsongConverter implements Converter<String, Bangsong> {
+        @Override
+        public Bangsong convert(String s) {
+            Bangsong bangsong = new Bangsong();
+            bangsong.setId(Integer.valueOf(s));
+            return bangsong;
+        }
+    }
+    
+    ```
+
+    ###### `ConfigurableWebBindingInitializer` 를 통한 `BangsongConverter`등록
+
+    ```java
+    @Bean
+    public ConfigurableWebBindingInitializer initializer(){
+        ConfigurableWebBindingInitializer initializer 
+            = new ConfigurableWebBindingInitializer();
+        ConfigurableConversionService conversionService 
+            = new FormattingConversionService();
+        conversionService.addConverter(new BangsongConverter());
+        initializer.setConversionService(conversionService);
+        return initializer;
+    }
+    ```
+
+* 다만 앞서서 살펴본, **`WebMvcConfigurer` 구현체**를 사용하면 이보다 더 쉽게 할 수 있다.
+
+  ```java
+  @Configuration
+  public class  WebConfig implements WebMvcConfigurer {
+      @Override
+      public void addFormatters(FormatterRegistry registry) {
+          registry.addConverter(new BangsongConverter());
+      }
+  }
+  ```
+
+* 마지막으로, **`BangsongConverter`를 Bean**으로 등록해주기만 해도 이 모든일을 처리해준다.
+
+  ```java
+  @Component
+  public class BangsongConverter implements Converter<String, Bangsong> {
+      @Override
+      public Bangsong convert(String s) {
+          Bangsong bangsong = new Bangsong();
+          bangsong.setId(Integer.valueOf(s));
+          return bangsong;
+      }
+  }
+  ```
+* 결국 `ConfigurableWebBindingInitializer` 를 사용할 일이 없을 것이고, 마지막 3번째 방법을 사용하는게 가장 편리하고 현명하다.
 #### 29.1.10 Template Engines
 
 * Spring MVC를 통한 동적인 HTML 컨텐츠 제공을 할 수 있다.
