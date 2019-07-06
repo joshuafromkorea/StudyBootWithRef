@@ -142,7 +142,7 @@ public void testFooWithWebTestClient(){
   }
   ```
 
-  * `@SpyBean`은, `@MockBean과 달리 일부만 조작되는 것을 알 수 있다.
+  * `@SpyBean`은, `@MockBean`과 달리 일부만 조작되는 것을 알 수 있다.
 
   ```java
   @Mock
