@@ -1,4 +1,4 @@
-package me.joshua.Day_22;
+package me.joshua.Day_23;
 
 import me.joshua.Day_20.SampleService;
 import org.junit.Test;
