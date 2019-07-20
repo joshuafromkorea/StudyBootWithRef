@@ -30,7 +30,6 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(Application.class);
-        springApplication.setWebApplicationType(WebApplicationType.REACTIVE);
         springApplication.run(args);
     }
 
