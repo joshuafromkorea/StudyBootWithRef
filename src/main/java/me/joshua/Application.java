@@ -1,11 +1,14 @@
 package me.joshua;
 
 import me.joshua.Day_23.Book;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
@@ -32,6 +35,19 @@ public class Application {
         SpringApplication springApplication = new SpringApplication(Application.class);
         springApplication.run(args);
     }
+
+
+    @Bean
+    public ApplicationRunner runner (final JdbcTemplate jdbcTemplate){
+        return new ApplicationRunner() {
+            @Override
+            public void run(ApplicationArguments args) throws Exception {
+                Integer count= jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Persons", Integer.class);
+                System.out.println("count : " +count);
+            }
+        };
+    }
+
 
 
     @Bean

@@ -1,0 +1,2 @@
+INSERT INTO Persons (LastName, FirstName, Address, City) VALUES ('Seo', 'Kiwon', 'Sinbong 1ro 112-2', 'Yongin');
+INSERT INTO Persons (LastName, FirstName, Address, City) VALUES ('Seo', 'Joshua', '204 1st ave.', 'LosAngeles');
