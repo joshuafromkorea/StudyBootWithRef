@@ -6,7 +6,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class MongoDataPopulator implements ApplicationRunner {
 
     @Autowired
