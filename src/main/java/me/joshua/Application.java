@@ -37,16 +37,16 @@ public class Application {
     }
 
 
-    @Bean
-    public ApplicationRunner runner (final JdbcTemplate jdbcTemplate){
-        return new ApplicationRunner() {
-            @Override
-            public void run(ApplicationArguments args) throws Exception {
-                Integer count= jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Persons", Integer.class);
-                System.out.println("count : " +count);
-            }
-        };
-    }
+//    @Bean
+//    public ApplicationRunner runner (final JdbcTemplate jdbcTemplate){
+//        return new ApplicationRunner() {
+//            @Override
+//            public void run(ApplicationArguments args) throws Exception {
+//                Integer count= jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Persons", Integer.class);
+//                System.out.println("count : " +count);
+//            }
+//        };
+//    }
 
 
 
